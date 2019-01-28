@@ -63,7 +63,7 @@
 
           function clickHandler(uri) {
               var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open('GET', url, false);
+              xmlhttp.open('GET', uri, false);
               try {
                   xmlhttp.send(null);                  // Send the request now
               } catch (e) {
@@ -77,7 +77,7 @@
 
               // Throw an error if the request was not 200 OK
               if (xmlhttp.status === 200) {
-                  document.location = url;
+                  document.location = uri;
               } else {
                   if (isAndroid()) {
                       document.location = getStoreURLAndroid();
