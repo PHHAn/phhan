@@ -62,29 +62,8 @@
           }
 
           function clickHandler(uri) {
-              var xmlhttp = new XMLHttpRequest();
-              xmlhttp.open('GET', uri, false);
-              try {
-                  xmlhttp.send(null);                  // Send the request now
-              } catch (e) {
-                  if (isAndroid()) {
-                      document.location = getStoreURLAndroid();
-				  } else {
-                      document.location = getStoreURLiOS();
-				  }
-                  return;
-              }
+              document.location = uri;
 
-              // Throw an error if the request was not 200 OK
-              if (xmlhttp.status === 200) {
-                  document.location = uri;
-              } else {
-                  if (isAndroid()) {
-                      document.location = getStoreURLAndroid();
-                  } else {
-                      document.location = getStoreURLiOS();
-                  }
-              }
               return;
           }
 		</script>
