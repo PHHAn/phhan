@@ -28,10 +28,64 @@
               appId: "com.tessemobile"
             }
           });
+
+          /**
+           * Check if the user-agent is Android
+           *
+           * @private
+           * @returns {Boolean} true/false
+           */
+          var isAndroid = function() {
+              return navigator.userAgent.match('Android');
+          }
+
+          /**
+           * Generate the app store link for iOS / Apple app store
+           *
+           * @private
+           * @returns {String} App store itms-apps:// link
+           */
+          var getStoreURLiOS = function() {
+              var baseurl = "itms-apps://itunes.apple.com/app/";
+              return (baseurl + "tesse/id1356942242?mt=8");
+          }
+
+          /**
+           * Generate the app store link for Google Play
+           *
+           * @private
+           * @returns {String} Play store https:// link
+           */
+          var getStoreURLAndroid = function() {
+              var baseurl = "market://details?id=";
+              return (baseurl + "com.tessemobile");
+          }
+
           function clickHandler(uri) {
-            console.log('uri:', uri);
-            deeplink.open(uri);
-            return false;
+              var xmlhttp = new XMLHttpRequest();
+              xmlhttp.open('GET', url, false);
+              try {
+                  xmlhttp.send(null);                  // Send the request now
+              } catch (e) {
+                  if (isAndroid()) {
+                      document.location = getStoreURLAndroid();
+				  } else {
+                      document.location = getStoreURLiOS();
+				  }
+                  return;
+              }
+
+              // Throw an error if the request was not 200 OK
+              if (xmlhttp.status === 200) {
+                  document.location = url;
+              } else {
+                  if (isAndroid()) {
+                      document.location = getStoreURLAndroid();
+                  } else {
+                      document.location = getStoreURLiOS();
+                  }
+              }
+              return;
           }
 		</script>
 	</head>
