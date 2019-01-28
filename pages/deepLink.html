@@ -28,10 +28,30 @@
               appId: "com.tessemobile"
             }
           });
+          var isAndroid = function() {
+              return navigator.userAgent.match('Android');
+          }
+
+          var isIOS = function() {
+              return navigator.userAgent.match('iPad') ||
+                  navigator.userAgent.match('iPhone') ||
+                  navigator.userAgent.match('iPod');
+          }
+
+          var isMobile = function() {
+              return isAndroid() || isIOS();
+          }
+
           function clickHandler(uri) {
             console.log('uri:', uri);
+            if (isMobile()) {
+                if (isAndroid()) {
+                    document.location = 'intent://tesse/live/5b84c857fb0354755b4665bb#Intent;package=com.tessemobile;scheme=tesse;end;';
+                } else {
+                    document.location = uri;
+				}
+			}
             // deeplink.open(uri);
-			  document.location = 'intent://tesse/live/5b84c857fb0354755b4665bb#Intent;package=com.tessemobile;scheme=tesse;end;';
             return false;
           }
 		</script>
