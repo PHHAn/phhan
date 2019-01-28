@@ -26,51 +26,19 @@
             },
             android: {
               appId: "com.tessemobile"
-            }
+            },
+			  fallback: 2000
           });
-
-          /**
-           * Check if the user-agent is Android
-           *
-           * @private
-           * @returns {Boolean} true/false
-           */
-          var isAndroid = function() {
-              return navigator.userAgent.match('Android');
-          }
-
-          /**
-           * Generate the app store link for iOS / Apple app store
-           *
-           * @private
-           * @returns {String} App store itms-apps:// link
-           */
-          var getStoreURLiOS = function() {
-              var baseurl = "itms-apps://itunes.apple.com/app/";
-              return (baseurl + "tesse/id1356942242?mt=8");
-          }
-
-          /**
-           * Generate the app store link for Google Play
-           *
-           * @private
-           * @returns {String} Play store https:// link
-           */
-          var getStoreURLAndroid = function() {
-              var baseurl = "market://details?id=";
-              return (baseurl + "com.tessemobile");
-          }
-
           function clickHandler(uri) {
-              document.location = uri;
-
-              return;
+            console.log('uri:', uri);
+            deeplink.open(uri);
+            return false;
           }
 		</script>
 	</head>
 	<body class="main">
-		<a href="#" data-uri="tesse://" onclick="clickHandler(this.dataset.uri)" style="font-size: 4em">open Tesse App iOS</a>
-		<a href="#" data-uri="tesse://tesse/" onclick="clickHandler(this.dataset.uri)" style="font-size: 4em">open Tesse App Android</a>
+		<a href="#" data-uri="tesse://home/live/5b84c857fb0354755b4665bb" onclick="clickHandler(this.dataset.uri)" style="font-size: 4em">open Tesse App iOS</a>
+		<a href="#" data-uri="tesse://tesse/live/5b84c857fb0354755b4665bb" onclick="clickHandler(this.dataset.uri)" style="font-size: 4em">open Tesse App Android</a>
         <button onclick="handleInstallExtension()" id="buttonInstallExtension">Install Extension</button>
 		<video id="video" width="100%" height="auto" autoplay>
 			Your browser is not support video tag
